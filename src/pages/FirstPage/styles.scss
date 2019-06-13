@@ -1,0 +1,11 @@
+ul {
+  &.no-style {
+    li {
+      list-style-type: none;
+      cursor: pointer;
+      .blankIcon {
+        opacity: 0;
+      }
+    }
+  }
+}

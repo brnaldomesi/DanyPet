@@ -1,0 +1,27 @@
+@import "./variables";
+
+.headerRow {
+  height: $header-height;
+  background-color: black;
+  color: white;
+  line-height: $header-height;
+  text-align: center;
+  position: relative;
+
+  .absolute {
+    position: absolute;
+    width: 100%;
+  }
+}
+
+
+.contentRow {
+  height: calc(100vh - #{$header-height});
+  label {
+    cursor: pointer;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
