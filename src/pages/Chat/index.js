@@ -11,7 +11,6 @@ import SectionPicture from 'containers/SectionPicture'
 import SectionText from 'containers/SectionText'
 import cx from 'classnames'
 import { dataType } from 'utils/constants'
-import { isNull } from 'util';
 
 class Chat extends Component {
 

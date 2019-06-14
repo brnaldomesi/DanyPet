@@ -28,7 +28,7 @@ class SectionIcon extends Component {
           question={question}
         />
         <div className='my-3 d-flex flex-wrap'>
-        {true &&
+        {true && question.choice &&
           question.choice.map((item, index) => { 
             return (
             <div 
