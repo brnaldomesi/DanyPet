@@ -3,7 +3,11 @@ import React, { Component } from 'react'
 import Question from 'containers/Question'
 
 class SectionText extends Component {
-  
+  constructor(props) {
+    super(props)
+    console.log('sdfsfdsdf')
+  }
+
   render() {
     const { question } = this.props
     

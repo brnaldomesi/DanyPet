@@ -12,3 +12,5 @@ export const routeStr = {
   petProfile: 'petProfile',
   details: 'details'
 }
+
+export const gifUrl = 'http://gifgifs.com/animations/animals/primates-and-monkeys/cartoon_gorilla.gif'

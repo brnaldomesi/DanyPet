@@ -2,9 +2,18 @@ import { Col, Row } from 'reactstrap'
 import React, { Component } from 'react'
 
 import { MdBrightness1 } from 'react-icons/md'
-import { dataType } from 'utils/constants'
+import { gifUrl } from 'utils/constants'
 
 class SectionPicture extends Component {
+
+  componentDidMount() {
+    // this.timer = setTimeout(this.handleSelectAnswer, 3000)
+  }
+
+  handleSelectAnswer = () => {
+    // clearTimeout(this.timer)
+    // this.props.handleSelectAnswer(this.props.questionIndex, 'petdog')()
+  }
 
   handleFileChange = evt => {
     var file = evt.target.files[0]
@@ -12,11 +21,6 @@ class SectionPicture extends Component {
     this.getBase64(file, (result) => {
       this.handleSelectAnswer(result)
     });
-  }
-
-  handleSelectAnswer = result => {
-    const { questionIndex } = this.props
-    this.props.handleSelectAnswer(questionIndex, result)()
   }
 
   getBase64(file, cb) {
@@ -31,19 +35,19 @@ class SectionPicture extends Component {
   }
 
   render() {
-    const { question } = this.props
-    
+
     return(
       <div className='py-4'>
         <Row>
           <Col xs='1'><MdBrightness1 size={28} /></Col>
           <Col xs='11' className='font-weight-bold pre-wrap'>
-          {question.type === dataType.picture && question.answer && 
+          {/* {question.type === dataType.picture && question.answer && 
             <img src={question.answer} alt='pet' />
           }
           {question.type === dataType.picture && !question.answer && 
             <input type='file' onChange={this.handleFileChange} accept="image/*" />
-          }
+          } */}
+          <img src={gifUrl} alt='pet' />
           </Col>
         </Row>
       </div>

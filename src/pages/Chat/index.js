@@ -11,6 +11,7 @@ import SectionPicture from 'containers/SectionPicture'
 import SectionText from 'containers/SectionText'
 import cx from 'classnames'
 import { dataType } from 'utils/constants'
+import { isNull } from 'util';
 
 class Chat extends Component {
 
@@ -22,7 +23,8 @@ class Chat extends Component {
 
   handleSelectAnswer = (curIndex, answerFromChild) => () => {
     clearTimeout(this.timer)
-    
+    clearTimeout(this.timerNextStep)
+
     if (this.answerRef) {
       if (!this.answerRef.disabled) { //Check if answer input field is disabled
         const answer = this.answerRef.value
@@ -43,24 +45,47 @@ class Chat extends Component {
 
   showErrorText = errorText => this.setState({ errorText }, this.autoEraseError)
 
-  autoEraseError = () => this.timer = setTimeout(() => this.setState({ errorText: null }), 3000)
+  autoEraseError = () => this.timer = setTimeout(() => this.setState({ errorText: null }), 1500)
 
   constructor(props) {
     super(props)
     this.state = { errorText: null }
   }
 
-  componentDidMount(){
+  componentDidMount() {
+    const questionList = this.getQuestionList()
+    const last = questionList.length - 1
+    const lastQuestion = questionList[last]
+    const answer =
+      lastQuestion.type === dataType.other ? 1
+        : lastQuestion.type === dataType.picture ? 'petdog'
+        : undefined
+
+    if (answer) {
+      const { isMobile, unitIndex } = this.props
+      const questionIndex = isMobile ? unitIndex : last
+      this.timerNextStep = setTimeout(() => {
+        this.handleSelectAnswer(questionIndex, answer)()
+      }, 3000)
+    }
+
     this.answerRef.focus();
   }
 
-  render() {
+  getQuestionList = () => {
     const { isMobile, unitIndex } = this.props
     const questionList =
       isMobile ? this.props.data.filter((question, index) => index === unitIndex)
         : this.props.data.filter((question, index) =>
           (typeof question.answer !== 'undefined') || index === 0 || index <= unitIndex)
 
+    return questionList
+
+  }
+  
+  render() {
+    const { isMobile, unitIndex } = this.props
+    const questionList = this.getQuestionList()
     
     const lastQuestion = questionList[questionList.length-1]
     const curIndex = isMobile ? unitIndex : questionList.length - 1

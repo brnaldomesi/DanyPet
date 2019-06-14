@@ -135,7 +135,6 @@ class Routes extends Component {
   handleSelectAnswer = (unitIndex, answer) => {
     const { history } = this.props
     const curRoute = this.state.curRoute
-    console.log('dddd', answer)
     let inProgressState = fp.set(`[${unitIndex}].answer`, answer)(this.state[curRoute])
     
     if (curRoute === routeStr.humanProfile) { //If question is about human profile
@@ -162,6 +161,7 @@ class Routes extends Component {
       }
     } else if (curRoute === routeStr.petProfile) { //If question is about pet profile
       if (unitIndex === this.state.petProfile.length - 1) {
+        
         let inDetailsProgressState = JSON.parse(JSON.stringify(this.state[routeStr.details]))
         inDetailsProgressState[0].content =
           inDetailsProgressState[0].content
@@ -186,7 +186,7 @@ class Routes extends Component {
           prevDogName: this.state.dogName,
           prevDogGenderPN: this.state.dogGenderPN
         })
-       
+        
         history.push(`/${routeStr.details}`)
       } else {
         const isAnswerNumber = Number.isInteger(answer)
@@ -235,7 +235,7 @@ class Routes extends Component {
             })
           }
         }
-        
+
         this.setState({
           unitIndex: unitIndex + 1,
           [routeStr.petProfile]: inProgressState,
@@ -295,12 +295,16 @@ class Routes extends Component {
     const unitIndex = this.state.unitIndex
     const { size:{ width } } = this.props
     const isMobile = width < 768 ? true : false
-
+    
     return (
       <Col
         xs='12' 
         md='6' 
-        className={cx("p-0 d-flex flex-column justify-content-between")}
+        className={cx(
+          "p-0", 
+          "overflow-auto",
+          "d-flex flex-column justify-content-between"
+        )}
       >
         <Chat
           isMobile={isMobile}
@@ -333,7 +337,8 @@ class Routes extends Component {
               className={cx(
                 'px-5 py-4',
                 'bg-dark text-white',
-                'd-flex flex-column justify-content-between'
+                'd-flex flex-column justify-content-between',
+                { 'fullHeightView' : isMobile }
               )}
             >
               <FirstPage 

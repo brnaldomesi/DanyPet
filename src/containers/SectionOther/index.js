@@ -5,10 +5,13 @@ import Question from 'containers/Question'
 class SectionOther extends Component {
   
   componentDidMount() {
-    setTimeout(this.timeoutCallback, 2000)
+    // this.timer = setTimeout(this.handleSelectAnswer, 3000)
   }
 
-  timeoutCallback = () => this.props.handleSelectAnswer(this.props.questionIndex, 1)()
+  handleSelectAnswer = () => {
+    // clearTimeout(this.timer)
+    // this.props.handleSelectAnswer(this.props.questionIndex, 1)()
+  }
   
   render() {
     const { question } = this.props
